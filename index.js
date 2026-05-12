@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { markStresses } from '@roj/rustress';
+import stress from 'ru-stress';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,7 +16,7 @@ app.post('/stress', async (req, res) => {
   }
 
   try {
-    const result = await markStresses(text);
+    const result = stress(text);
     res.json({ result });
   } catch (error) {
     console.error('Ошибка при обработке:', error);
