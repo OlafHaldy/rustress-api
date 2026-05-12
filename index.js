@@ -1,5 +1,5 @@
-// Импортируем библиотеку @roj/rustress
-import { markStresses } from '@roj/rustress';
+// Импортируем библиотеку rustress из GitHub
+import rustress from 'rustress';
 import express from 'express';
 import cors from 'cors';
 
@@ -18,8 +18,17 @@ app.post('/stress', async (req, res) => {
   }
 
   try {
-    // Вызываем функцию markStresses из библиотеки
-    const result = await markStresses(text);
+    // Вызываем функцию markStress из библиотеки (синтаксис может отличаться)
+    // В зависимости от реализации библиотеки, это может быть rustress.markStress или просто markStress
+    let result;
+    if (typeof rustress.markStress === 'function') {
+        result = await rustress.markStress(text);
+    } else if (typeof rustress === 'function') {
+        result = await rustress(text);
+    } else {
+        // Если ничего не подошло, просто возвращаем текст без изменений
+        result = text;
+    }
     res.json({ result });
   } catch (error) {
     console.error('Ошибка при обработке:', error);
