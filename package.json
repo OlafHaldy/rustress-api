@@ -2,14 +2,13 @@
   "name": "rustress-api",
   "version": "1.0.0",
   "type": "module",
-  "description": "API для расстановки ударений в русских текстах",
+  "description": "API для расстановки ударений в русских текстах (собственный словарь)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "rustress": "git+https://github.com/rozborsky/rustress.git"
+    "cors": "^2.8.5"
   }
 }
