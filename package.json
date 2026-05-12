@@ -10,6 +10,6 @@
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "rustress": "https://github.com/rozborsky/rustress"
+    "rustress": "git+https://github.com/rozborsky/rustress.git"
   }
 }
