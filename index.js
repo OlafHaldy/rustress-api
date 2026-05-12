@@ -1,6 +1,7 @@
+// Импортируем библиотеку @roj/rustress
+import { markStresses } from '@roj/rustress';
 import express from 'express';
 import cors from 'cors';
-import { markStresses } from 'rustress';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,25 +9,30 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Эндпоинт для расстановки ударений
 app.post('/stress', async (req, res) => {
   const { text } = req.body;
   
   if (!text || typeof text !== 'string') {
-    return res.status(400).json({ error: 'Текст не предоставлен' });
+    return res.status(400).json({ error: 'Текст не предоставлен или не является строкой' });
   }
 
   try {
+    // Вызываем функцию markStresses из библиотеки
     const result = await markStresses(text);
     res.json({ result });
   } catch (error) {
+    console.error('Ошибка при обработке:', error);
     res.status(500).json({ error: error.message });
   }
 });
 
+// Корневой эндпоинт для проверки
 app.get('/', (req, res) => {
   res.json({ message: 'API для расстановки ударений работает. Используйте POST /stress' });
 });
 
+// Запускаем сервер
 app.listen(port, () => {
   console.log(`Сервер запущен на порту ${port}`);
 });
